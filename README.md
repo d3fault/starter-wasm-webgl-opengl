@@ -2,17 +2,12 @@
 
 A starting point for a new web and native cross-platform 3D project.
 
-Builds with CMake. Supports [GLFW](http://www.glfw.org/).
+Builds with CMake. Uses [GLFW](http://www.glfw.org/).
 
 ## Details
 
-* Requires `Make` and `CMake` installed.
-* `CMake` configures `Make` to build for both environments.
-* The `Makefile` in the root is only a task runner.
-* [Libraries available in emscripten][emsdklib].
-* Displays an empty off-white window. Nothing else.
-
-[emsdklib]:https://github.com/kripken/emscripten/tree/incoming/system/include
+* Requires `CMake` and `GLFW` installed.
+* Displays an empty green window. Nothing else.
 
 ## Building
 
@@ -20,38 +15,32 @@ Builds with CMake. Supports [GLFW](http://www.glfw.org/).
 
 * [Download or Compile the WASM Toolchain][wasm-toolchain].
 * Setup the WASM toolchain
+  * `git clone https://github.com/emscripten-core/emsdk.git`
   * `cd emsdk`
   * `./emsdk install latest`
   * `./emsdk activate latest`
   * `source ./emsdk_env.sh`
 * Build/Run the example
   * `cd starter-wasm-webgl-opengl`
-  * `make wasm`
-  * Available at: http://localhost:8080/wasm.html
+  * `mkdir buildwasm && cd buildwasm`
+  * `cmake ..`
+  * `cmake --build .`
+  * `python -m SimpleHTTPServer 8080 #or other webserver`
+  * Available at: http://localhost:8080/demoapp.html
 
 [wasm-toolchain]:http://webassembly.org/getting-started/developers-guide/
 
 ### Native Linux
 
-Tested on Ubuntu 16.04.
+Tested on Debian 11.
 
-* Install development tools X11 and OpenGL: `sudo apt install xorg-dev libgl1-mesa-dev`
-* Install GLFW: http://www.glfw.org/download.html
-  * `wget https://github.com/glfw/glfw/releases/download/3.2.1/glfw-3.2.1.zip`
-  * `unzip glfw-3.2.1.zip`
-  * `cd glfw-3.2.1`
-  * `cmake .`
-  * `sudo make install`
+* Install development tools X11 and OpenGL: `sudo apt install xorg-dev libgl1-mesa-dev libglfw3-dev`
 * Build/Run the example
   * `cd starter-wasm-webgl-opengl`
-  * `make native`
-
-[glfw-dl]:http://www.glfw.org/download.html
-
-## Notes
-
-I was hoping to build both in the same CMake tree, but the `CMAKE_TOOLCHAIN_FILE` change
-for emscripten breaks the native build.
+  * `mkdir buildnative && cd buildnative`
+  * `cmake ..`
+  * `cmake --build .`
+  * `./demoapp`
 
 Thanks to:
 

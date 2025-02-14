@@ -66,7 +66,7 @@ int main() {
   glfwMakeContextCurrent(window);
 
   // Near white background
-  glClearColor(0.9f, 0.9f, 0.9f, 0.0f);
+  glClearColor(0.0f, 1.0f, 0.0f, 0.0f);
 
   // Run the loop correctly for the target environment
 #ifdef __EMSCRIPTEN__
